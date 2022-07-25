@@ -19,7 +19,7 @@ export const Internal = ({params}) => {
                 <Route exact path="/index" render={props => <Home params={params} />}/>
                 <Route exact path="/admin/:layout/:idCoownership" render={props => <Admin params={params} />}/>
                 <Route exact path="/admin/:layout/" render={props => <Admin params={params} />}/>
-                <Redirect from="/admin" to="/admin/board/" />
+                <Redirect from="/admin" to="/admin/store/" />
                 <Redirect to="/" />
             </Switch>
         </Router>

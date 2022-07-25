@@ -26,9 +26,9 @@ export const Content = ({drawerWidth, params}) => {
     
    useEffect(() => {
       const load = async () => {
-        const Modules = (await import("./content/Store")).default;
+        const Modules = (await import("./content/store/Brands")).default;
         setModule(<Modules params = {params}/>);
-      };
+      }; 
       load();
    }, [params.layout]);
 

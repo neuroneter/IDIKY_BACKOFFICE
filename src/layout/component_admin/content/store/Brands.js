@@ -1,12 +1,12 @@
 import React from 'react'
 
-const Stores = ({params}) => {
+const Brands = ({params}) => {
     console.log(params);
     return (
         <div className="container-fluid">
-            hola mundo
+            hola soy una marca
         </div>
     )
 }
 
-export default Stores;
+export default Brands;

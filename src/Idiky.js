@@ -8,7 +8,6 @@ export const Idiky = (props) => {
         <Provider store={store}>
             <Main histoy={props.history}/>
         </Provider>
-        
     )
   };
   

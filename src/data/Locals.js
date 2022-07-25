@@ -27,7 +27,7 @@ export const Locals = [
           {group:'menu2', key:'11', name:'doc', label:'Documentos', icon:<SettingsIcon/>, layout:'board'},
           {group:'menu2', key:'12', name:'cota', label:'Votaciones', icon:<SettingsIcon/>, layout:'board'}, 
           {group:'menu2', key:'13', name:'settings', component:<Settings/>, label:'Configuración', icon:<SettingsIcon/>, layout:'/admin/settings/:id'},
-          {group:'menu3', key:'14', name:'reda', label:'Redactar', icon:<SettingsIcon/>, layout:'board'},
+          {group:'menu3', key:'14', name:'reda', label:'Productos', icon:<SettingsIcon/>, layout:'board'},
           {group:'menu3', key:'15', name:'mens', label:'Mensajes', icon:<SettingsIcon/>, layout:'board'}, 
           {group:'menu3', key:'16', name:'clea', label:'Eliminados', icon:<SettingsIcon/>, layout:'board'}
       ]

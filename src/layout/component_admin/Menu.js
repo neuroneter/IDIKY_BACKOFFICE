@@ -14,6 +14,7 @@ import { useHistory } from "react-router-dom";
 function Menu(props) {
 
     let history = useHistory();
+    
     const useStyles = makeStyles((theme) => ({
         drawer: {
           [theme.breakpoints.up('sm')]: {
@@ -28,7 +29,9 @@ function Menu(props) {
     }));
 
     const { window } = props;
+    
     const classes = useStyles();
+
     const theme = useTheme();
 
     const clicItem = (layout) => {

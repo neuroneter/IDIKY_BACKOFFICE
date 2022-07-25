@@ -1,0 +1,33 @@
+// Colores
+$azul: #a8d0e6;
+$azul-logo: #004c6f;
+$azul-oscuro: #004c6f;
+$fucsia: #ed5359;
+$rojo: #e24e53;
+$dark-azul: #004c6f;
+$amarillo: #f3a83c;
+$blanco:white;
+$celeste: #a3e9fc;
+$gris: rgb(184, 184, 184);
+$border-gris: rgb(224, 224, 224);
+$light-gris: rgb(235, 235, 235);
+$marron: rgb(158, 111, 35);
+$morado: #7600ff;
+$naranja:#f27353;
+$negro: rgb(58, 58, 58);
+$verde: #469647;
+
+
+
+.Azul {background-color:$azul; color:$blanco}
+.Amarillo{background-color:$amarillo}
+.Blanco{background-color:$blanco}
+.Celeste{background-color:$celeste}
+.Fucsia{background-color:$fucsia; color:$blanco}
+.Gris{background-color:$gris}
+.Marron{background-color:$marron}
+.Morado{background-color:$morado}
+.Naranja{background-color:$naranja}
+.Negro{background-color:$negro}
+.Rojo{background-color:$rojo}
+.Verde{background-color:$verde; color:$blanco}

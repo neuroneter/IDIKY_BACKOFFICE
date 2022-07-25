@@ -1,0 +1,17 @@
+.components_topnav{
+    background-color: $blanco;
+    background-size: cover;
+    min-height: .5vh;
+    font-size:large;
+    padding: .1vh;
+    border-bottom: 1px solid $dark-azul;
+
+    div{
+        padding: 10px;
+    }
+
+    span{
+        padding-left: 10px;
+    }
+
+}

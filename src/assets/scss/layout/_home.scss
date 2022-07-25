@@ -1,0 +1,231 @@
+.homeContent{
+        
+    .isBigDesktop, .isDesktop{ 
+        overflow-y: hidden;
+        overflow-x: hidden;
+        -ms-overflow-style: none;
+        height:100vh;
+    }
+
+    .isSmallDesktop{
+        height:100vh;
+    }
+
+    .isTablet{}
+    
+    
+    background-color: $azul;
+    font-family: SinhalaMN;
+    
+    
+    .cont1{
+        .isSmallDesktop{    
+            .description{
+                padding-top:0px;
+
+                h2, h1{
+                    font-size:larger; 
+                }
+            }
+            .imgHome{
+                height: 70vh;
+                img{width: 80%;}
+            }
+        }
+
+        .isTablet{
+
+            .description{
+                padding-top:0px;
+                h2, h1{
+                    font-size:x-large; 
+                }
+            }
+            .imgHome{
+                img{width: 75%;}
+            }
+        }
+        .isMobile{
+
+            .description{
+                padding-top:10px;
+                h2, h1{
+                    font-size:large; 
+                }
+            }
+            
+            .imgHome{
+                height: 50vh;
+                img{width: 85%;}
+            }
+        }
+    }
+
+    .cont1{
+        .isTablet{}
+    }
+
+    .cont1{
+        .isBigDesktop, .isDesktop{ }
+    }
+
+    .cont1{
+
+        .logo{
+            color:$azul-logo;
+            font-size:xxx-large;
+            font-weight:900;
+            padding:5px 20px 20px 50px;
+            width: 100%;
+
+            img{
+                width:auto;
+                height: 7vh;
+            }
+
+            span{
+                width: 100%;
+                padding-left: 15px;
+            }
+
+        }
+
+        .imgHome{
+            height: 70vh;
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            img{width: 60%;}
+        }
+
+        .contacto{
+            color:$blanco;
+            font-size:x-large;
+        }
+
+
+        .description{
+            color:$blanco;
+            padding: 30px;
+
+            h2{
+               font-size:x-larger; 
+            }
+
+            h1{
+                font-size:xx-larger;
+            }
+        }
+
+    }
+
+    .cont2{
+        background-color:$fucsia;
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+
+        .AppDownload{
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center; 
+            padding: 10px;
+        }
+
+        .btoApp{background-color: $azul-oscuro;}
+
+    }
+
+    .cont2{
+        
+        .isMobile{
+            padding-top: 5vh;
+            height:85vh; 
+        }
+    }
+
+
+
+    .cont2, .cont3{
+
+        .isTablet, .isBigDesktop, .isSmallDesktop, .isDesktop, .isDafault{
+            height:50vh; 
+        }
+        
+        
+
+        h2{
+            color:$blanco;
+            font-size: x-large;
+        }
+        
+        .isTablet{
+            img{ width: 50%; }
+        }
+
+        .isMobile{
+            img{ width: 30%; }
+        }
+
+        img{ width: 80%; }
+
+        
+        
+        .btoApp{
+            padding: 5px;
+            border: 1px solid $negro;
+            margin:10px;
+            color:$light-gris;
+            font-size: xx-large;
+
+            span{
+                font-size: x-large;
+                margin-left: 10px;
+                vertical-align: middle;
+            }
+
+        }
+
+        .btoApp:hover{
+            cursor: pointer;
+            color:$blanco;
+            background-color:$azul;
+        }
+
+        a{
+            text-decoration:none;
+        }
+
+    }    
+
+
+    .cont3{
+        background-color:$azul-oscuro;
+        background-image: url(../../../assets/img/asesor.png);
+        background-size: 89%;
+        background-repeat: no-repeat;
+        background-position-x: 130%;
+        background-position-y: 10px;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding:10px;
+
+        .btoApp{background-color:$rojo}
+
+    }
+
+    .contacto{
+
+        padding: 20px;
+        font-size:large;
+    
+        span{
+            padding-left: 10px;
+        }
+
+    }
+
+}

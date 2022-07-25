@@ -1,0 +1,11 @@
+@import './base/_settings';
+@import './components/TopNav';
+@import './layout/home';
+@import './layout/admin';
+@import './layout/adminMenu';
+@import "http://fonts.googleapis.com/css?family=Droid+Sans";
+
+@font-face{
+    font-family: 'SinhalaMN';
+    src: local('SinhalaMN'), url('../fonts/SinhalaMN.ttc') format('truetype');
+}

@@ -64,7 +64,6 @@ export default function TopToolBar({handleDrawerToggle, params}) {
                     className={classes.menuButton}
                     color="inherit"
                     aria-label="open drawer"
-                    onClick={handleDrawerToggle.bind(this)}
                 >
                     <MenuIcon />
                 </IconButton>
@@ -76,7 +75,7 @@ export default function TopToolBar({handleDrawerToggle, params}) {
                     <Acount handleProfileMenuOpen={handleProfileMenuOpen.bind(this)} handleMenuClose={handleMenuClose.bind(this)} isMobileMenuOpen={isMobileMenuOpen} isMenuOpen={isMenuOpen} anchorEl={anchorEl} />  
                 </div>
                 {
-                <MobilMenu handleProfileMenuOpen={handleProfileMenuOpen.bind(this)} handleMobileMenuOpen={handleMobileMenuOpen.bind(this)} handleMobileMenuClose={handleMobileMenuClose.bind(this)} isMobileMenuOpen={isMobileMenuOpen} mobileMoreAnchorEl={mobileMoreAnchorEl} />
+                //<MobilMenu handleProfileMenuOpen={handleProfileMenuOpen.bind(this)} handleMobileMenuOpen={handleMobileMenuOpen.bind(this)} handleMobileMenuClose={handleMobileMenuClose.bind(this)} isMobileMenuOpen={isMobileMenuOpen} mobileMoreAnchorEl={mobileMoreAnchorEl} />
             }
             
             </Toolbar>

@@ -1,18 +1,19 @@
-import {createStore, combineReducers, applyMiddleware, compose} from 'redux';
-import thunk from 'redux-thunk';
-import {authReducers} from '../reducers/authReducers';
-import {Locals} from '../reducers/Locals';
+import { configureStore } from '@reduxjs/toolkit'
+import { counterSlice } from './states/Counter'
+import { loadLocals } from './states/LoadLocals'
+import { tmpImg } from './states/TmpImg'
+import { brands } from './states/Brands'
+import { categories } from './states/Categories'
 
-const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
-
-const reducers = combineReducers({
-    auth: authReducers,
-    locals: Locals
-});
-
-export const store = createStore(
-    reducers, 
-    composeEnhancers(
-        applyMiddleware(thunk)
-    )
-);
+export const store = configureStore({
+  reducer: {
+    counter:counterSlice.reducer,
+    tmpImg:tmpImg.reducer,
+    brands:brands.reducer,
+    locals:loadLocals.reducer,
+    categories:categories.reducer
+  },
+  middleware: getDefaultMiddleware => getDefaultMiddleware({
+    serializableCheck: false,
+})
+})

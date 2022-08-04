@@ -10,8 +10,6 @@ export const Home = ({params}) => {
     //const {history, sizeScreen}
     const {sizeScreen} = params;
 
-    console.log(sizeScreen);
-
     return (
         <div className = "homeContent">
                        

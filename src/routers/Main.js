@@ -3,6 +3,7 @@ import { LoginScreen } from '../components/login/LoginScreen';
 import {BrowserRouter as Router,  Switch, Route  } from "react-router-dom";
 import { Internal } from './Internal';
 import { useMediaQuery } from 'react-responsive';
+import { Home } from '../layout/Home'
 
 export const Main = (props) => {
     let params = {}
@@ -19,7 +20,9 @@ export const Main = (props) => {
             <div>
                 <Switch>
                     <Route exact path="/login" component={ LoginScreen }/>
-                    <Route path="/" render={props => <Internal params={params} />} />
+                    <Route exact path="/index" render={props => <Home params={params} />}/>
+                    <Route exact path="/" render={props => <Home params={params} />}/>
+                    <Route path="/:whois" render={props => <Internal params={params} />} />
                 </Switch>
             </div>
         </Router>

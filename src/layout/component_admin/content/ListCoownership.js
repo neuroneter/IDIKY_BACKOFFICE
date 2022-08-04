@@ -2,9 +2,12 @@ import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import {Simple} from '../../../components/cards/Simple'
 import { useHistory } from "react-router-dom";
-import {Colors} from "../../../data/Colors"
+import {Colors} from '../../../stores/data/Colors'
+import {useSelector} from 'react-redux';
 
 export const ListCoownership = ({params}) => {
+
+    const {locals} = useSelector(state => state.locals);
 
     const useStyles = makeStyles((theme) => ({
         coownership:{
@@ -22,7 +25,7 @@ export const ListCoownership = ({params}) => {
 
     return (
         <div >
-            <h5 className="text-center">{params.locals.titleCoownerShip}</h5>
+            <h5 className="text-center">{locals.titleCoownerShip}</h5>
             {
                 params.coownerships.map( coo => (
                     <div key={coo.id} className={classes.coownership} onClick={clicItem.bind(this,coo.id)} style={{cursor: 'pointer'}}>

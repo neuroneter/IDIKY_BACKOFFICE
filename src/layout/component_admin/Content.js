@@ -1,11 +1,16 @@
-import React, {useState, useEffect, Fragment} from 'react'
+import React  from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import { Board } from './content/Board'
+import { useParams } from 'react-router'
+import {useSelector} from 'react-redux';
+
 console.disableYellowBox = true;
 
-
-export const Content = ({drawerWidth, params}) => {
+export const Content = ({drawerWidth}) => {
     
+    
+    let params = useParams();
+    const { locals } = useSelector(state => state.locals);
     
     const useStyles = makeStyles((theme) => ({
       
@@ -20,27 +25,23 @@ export const Content = ({drawerWidth, params}) => {
           padding: theme.spacing(3),
         },
     }));
+
     const classes = useStyles();
 
-    const [module, setModule] = useState(<div>Loading</div>);
-    
-   useEffect(() => {
-      const load = async () => {
-        const Modules = (await import("./content/store/Brands")).default;
-        setModule(<Modules params = {params}/>);
-      }; 
-      load();
-   }, [params.layout]);
+   const ModuleTmp = () => {
+      if(params.layout !== undefined){
+        const module = locals.menus.find(obj => obj.module === params.layout);
+        return module.component;
+      }else return <Board/>
+      
+   }
 
     return (
         <main className={classes.content}>
-            <div className={classes.toolbar} />
-            {
-              (params.layout === 'board' || params.layout === undefined)
-              &&<Board params={params}/>
-            }
-            <Fragment >{module}</Fragment>
-            
+            <div className={classes.toolbar} />    
+            <ModuleTmp/>
         </main>
     )
 }
+
+//<Fragment >{module}</Fragment>

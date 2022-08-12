@@ -7,6 +7,10 @@ import { makeStyles } from '@material-ui/core/styles'
 import Menu from './component_admin/Menu'
 import TopToolBar from './component_admin/TopToolBar'
 import {Content} from './component_admin/Content'
+import {addDivipola} from '../stores/states/Divipola'
+import { useDispatch } from 'react-redux'
+import {Connect} from "../stores/actions/Connect"
+
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -27,8 +31,16 @@ const useStyles = makeStyles((theme) => ({
 
 function Admin(props) {
 
+  const dispatch = useDispatch();
   let params = useParams();
   const classes = useStyles();
+
+  //Es la funcion callback que envia al estado global los datos de divipola
+  const callBack = (data) => {
+    dispatch(addDivipola(data));
+  }
+  //Utilizamos esta fucnion para solicitar todos los datos de divipola
+  Connect('divipola/list', null, 'GET', callBack.bind(this) );
 
   return (
     <div className={classes.root}>

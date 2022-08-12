@@ -72,7 +72,7 @@ export const ListSuppliers = () => {
   const callBack = (data) => {
     // dispatch(addSuppliers(data))
     //buildTable(data)
-    console.log(data)
+    //console.log(data)
   }
 
   //Funcion flecha que abstrae la construcción de la tabla utilizando un bucle "map" el cual nos permite construir la misma estructura de la tabla

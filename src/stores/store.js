@@ -5,6 +5,7 @@ import { tmpImg } from './states/TmpImg'
 import { brands } from './states/Brands'
 import { categories } from './states/Categories'
 import { suppliers } from './states/Suppliers'
+import { divipola } from './states/Divipola'
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
     locals: loadLocals.reducer,
     categories: categories.reducer,
     suppliers: suppliers.reducer,
+    divipola: divipola.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

@@ -30,7 +30,7 @@ export const FormCategories = ({setlist, dataRow}) => {
 
     const [imgObj, setImgObj] = useState(imgDefault('icon'));
     const [icoObj, setIcoObj] = useState(imgDefault('img'));
-    const { register, handleSubmit, control, formState:{errors} } = useForm();
+    const { register, handleSubmit, formState:{errors} } = useForm();
   
     const callBack = (data) => {
         dispatch(changeFlagCategories(false));

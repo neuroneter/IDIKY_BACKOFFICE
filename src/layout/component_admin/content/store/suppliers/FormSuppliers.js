@@ -1,36 +1,24 @@
 import React, {useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {
-  Button,
-  Row,
-  Col,
-  Card,
-  CardHeader,
-  CardBody,
-  FormGroup,
-  Label
-} from 'reactstrap'
+import { Button,Row,Col,Card,CardHeader,CardBody,FormGroup,Label} from 'reactstrap'
 import { useForm } from 'react-hook-form'
-import { Connect } from '../../../../../stores/actions/Connect'
-import ArrowBackIcon from '@material-ui/icons/ArrowBack'
 import { changeFlagSuppliers } from '../../../../../stores/states/Suppliers';
 import {Divipola} from '../../../../../components/cross/divipola';
-import Select from 'react-select'
+import Select from 'react-select';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 export const FormSuppliers = ({ setlist, dataRow }) => {
 
-  const stateSuppliers = useSelector((state) => state.divipola);
+  const stateDivipola = useSelector((state) => state.divipola)
 
   const dispatch = useDispatch()
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
+  const {register,handleSubmit, formState: { errors }} = useForm({
     defaultValues: {
       state: dataRow.state === undefined ? true : dataRow.state,
     },
   })
+
+  const [typeId, setTypeId] = useState(dataRow.typeId)
 
   const callBack = (data) => {
     dispatch(changeFlagSuppliers(false))
@@ -47,9 +35,8 @@ export const FormSuppliers = ({ setlist, dataRow }) => {
     const body = {
       id: dataRow._id,
       name: data.name,
-      divipola: data.divipola,
+      divipola: stateDivipola.defaultCity.code,
       zipCode: data.zipCode,
-      description: data.description,
       chamberCom: data.chamberCom, 
       taxRegistry: data.taxRegistry,
       tradeAgree: data.tradeAgree,
@@ -58,18 +45,22 @@ export const FormSuppliers = ({ setlist, dataRow }) => {
       telephone: data.telephone,
       assignedAdvisor: data.assignedAdvisor,
       telephoneAdvisor: data.telephoneAdvisor,
-      typeId: data.typeId,
+      typeId: typeId,
       idNumber: data.idNumber,
       dv: data.dv,
       mercantileRegistration: data.mercantileRegistration,
       responsability: data.responsability,
       economyActivity: data.economyActivity
     }
-
+    console.log(body)
+/*
     !dataRow._id
       ? Connect('supliers/push', body, 'POST', callBack.bind(this))
       : Connect('supliers/update', body, 'POST', callBack.bind(this))
+      */
   }
+
+
 
   return (
     <Row>
@@ -166,10 +157,12 @@ export const FormSuppliers = ({ setlist, dataRow }) => {
                   <Col xs='2' sm='2' md='2'>
                     <FormGroup> 
                     <Label>Tipo de Documento</Label>
-                    <Select options={options}
-                    {...register('typeId', { required: true, maxLength: 40 })}
-                    defaultValue={dataRow.typeId}
-                    />
+                      <Select 
+                          defaultValue={ typeId }
+                          selectedValue={ typeId }
+                          options={options}  
+                          onChange={(e) => setTypeId(e.value)} 
+                      />
                     </FormGroup>
                   </Col>
                     

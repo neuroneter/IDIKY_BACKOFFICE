@@ -60,6 +60,7 @@ export const Divipola = ({defaultCiti}) => {
     }
     
     const citieSelect =(info) => {
+      console.log({value:info.value, code:info.code, label:info.label})
         dispatch(setDefaultCity({
             city:{value:info.value, code:info.code, label:info.label},
             state:stateDivipola.defaultState

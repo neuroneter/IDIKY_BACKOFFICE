@@ -31,7 +31,7 @@ export const Upload = ({bName, source, setObj, vWidth, vCrop, mWidth, mHeight}) 
       setObj({
         url:data.url,
         view:(<CloudinaryContext cloudName="idikydev" uploadPreset="bobSeller">
-                <Image publicId={data.url} > <Transformation width={vWidth} crop={vCrop} /> </Image>
+                <Image publicId={data.url+".jpg"} > <Transformation width={vWidth} crop={vCrop} /> </Image>
               </CloudinaryContext>
               )
       });

@@ -74,7 +74,6 @@ export const FormSuppliers = ({ setlist, dataRow }) => {
 
   const save = (data) => {
     const body = {
-      idSup: dataRow._id,
       name: data.name,
       divipola: stateDivipola.defaultCity.code,
       zipCode: data.zipCode,
@@ -96,8 +95,8 @@ export const FormSuppliers = ({ setlist, dataRow }) => {
     console.log(body)
 
     !dataRow._id
-      ? Connect('supliers/push', body, 'POST', callBack.bind(this))
-      : Connect('supliers/update', body, 'POST', callBack.bind(this))
+      ? Connect('suppliers/push', body, 'POST', callBack.bind(this))
+      : Connect('suppliers/update', body, 'POST', callBack.bind(this))
   }
 
   return (
@@ -252,7 +251,7 @@ export const FormSuppliers = ({ setlist, dataRow }) => {
                   <Col xs='2' sm='2' md='2'>
                     <Label>Responsabilidad</Label>
                     <input
-                      {...register('responsabilitity', {
+                      {...register('responsability', {
                         required: true,
                         maxLength: 10,
                       })}
@@ -381,12 +380,12 @@ export const FormSuppliers = ({ setlist, dataRow }) => {
                       <Col>
                         <Upload
                           bName='+ Cargar Imagen'
-                          source='categories'
+                          source='suppliers'
                           setObj={setImgRegistry.bind(this)}
                           vWidth='100'
                           vCrop='scale'
-                          mWidth='500'
-                          mHeight='500'
+                          mWidth='400'
+                          mHeight='400'
                         />
                       </Col>
                     </Row>
@@ -399,12 +398,12 @@ export const FormSuppliers = ({ setlist, dataRow }) => {
                       <Col>
                         <Upload
                           bName='+ Cargar Imagen'
-                          source='categories'
+                          source='suppliers'
                           setObj={setImgCommerce.bind(this)}
                           vWidth='100'
                           vCrop='scale'
-                          mWidth='500'
-                          mHeight='500'
+                          mWidth='400'
+                          mHeight='400'
                         />
                       </Col>
                     </Row>
@@ -417,12 +416,12 @@ export const FormSuppliers = ({ setlist, dataRow }) => {
                       <Col>
                         <Upload
                           bName='+ Cargar Imagen'
-                          source='categories'
+                          source='suppliers'
                           setObj={setImgTradeAgree.bind(this)}
                           vWidth='100'
                           vCrop='scale'
-                          mWidth='500'
-                          mHeight='500'
+                          mWidth='400'
+                          mHeight='400'
                         />
                       </Col>
                     </Row>

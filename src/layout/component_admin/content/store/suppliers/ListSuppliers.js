@@ -16,6 +16,8 @@ import DeleteIcon from '@material-ui/icons/Delete'
 import { addSuppliers } from '../../../../../stores/states/Suppliers'
 import { useDispatch, useSelector } from 'react-redux'
 import { FormSuppliers } from './FormSuppliers'
+import { Image, Transformation } from 'cloudinary-react'
+import { CloudinaryContext } from 'cloudinary-react'
 import { Modals } from '../../../../../components/cross/modals'
 import { changeFlagSuppliers } from '../../../../../stores/states/Suppliers'
 
@@ -45,6 +47,16 @@ export const ListSuppliers = () => {
     dispatch(changeFlagSuppliers(false))
   }
 
+  const imgDefault = (url) => {
+    return (
+      <CloudinaryContext cloudName='idikydev' uploadPreset='bobSeller'>
+        <Image publicId={url}>
+          <Transformation width='50' crop='scale' />
+        </Image>
+      </CloudinaryContext>
+    )
+  }
+
   //la función flecha callBackErase es enviada por el modulo Modal y se dispara si en este modal el usuario acepta el proceso de borrado
   //llama al metodo connect solicitando eliminar un registro y se cierra el modal seteando un valor false
   const callBackErase = () => {
@@ -56,7 +68,9 @@ export const ListSuppliers = () => {
         name: data.name,
         divipola: data.divipola,
         zipCode: data.zipCode,
-        description: data.description,
+        urlCommerce: data.urlCommerce,
+        urlRegistry: data.urlRegistry,
+        urlTradeAgree: data.urlTradeAgree,
         source: 'suppliers',
       },
       'POST',
@@ -70,9 +84,9 @@ export const ListSuppliers = () => {
   //datos en el estado y notificar a todos los modulos que pueden usar estos datos
   //tambien realizamo la construcción de la tabla que listara los datos recuperados a travez del connect a el servidor
   const callBack = (data) => {
-    // dispatch(addSuppliers(data))
-    //buildTable(data)
-    //console.log(data)
+    dispatch(addSuppliers(data))
+    buildTable(data)
+    console.log(data)
   }
 
   //Funcion flecha que abstrae la construcción de la tabla utilizando un bucle "map" el cual nos permite construir la misma estructura de la tabla
@@ -91,7 +105,9 @@ export const ListSuppliers = () => {
           <td>{row.name}</td>
           <td>{row.divipola}</td>
           <td>{row.zipCode}</td>
-          <td>{row.description}</td>
+          <td>{imgDefault(row.urlCommerce)}</td>
+          <td>{imgDefault(row.urlRegistry)}</td>
+          <td>{imgDefault(row.urlTradeAgree)}</td>
           <td>
             <div>
               <EditIcon
@@ -124,10 +140,10 @@ export const ListSuppliers = () => {
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
-    if (!stateSuppliers.flagSuppliers)
-      Connect('suppliers/list', null, 'GET', callBack.bind(this))
-    else buildTable(stateSuppliers.allSuppliers)
-  })
+    //if (!stateSuppliers.flagSuppliers)
+    //Connect('suppliers/list', null, 'GET', callBack.bind(this))
+    //else buildTable(stateSuppliers.allSuppliers)
+  }, [stateSuppliers.allSuppliers])
 
   return (
     <>

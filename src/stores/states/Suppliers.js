@@ -4,7 +4,7 @@ export const suppliers = createSlice({
   name: 'suppliers',
   initialState: {
     allSuppliers: [],
-    flagSuppliers: false
+    flagSuppliers: false,
   },
   reducers: {
     addSupliers: (state, action) => {
@@ -12,8 +12,8 @@ export const suppliers = createSlice({
       state.flagSuppliers = true
     },
     changeFlagSuppliers: (state, action) => {
-      state.flagSupliers = action.payload
-    }
+      state.flagSuppliers = action.payload
+    },
   },
 })
 

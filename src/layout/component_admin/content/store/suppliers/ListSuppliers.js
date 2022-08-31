@@ -71,6 +71,17 @@ export const ListSuppliers = () => {
         urlCommerce: data.urlCommerce,
         urlRegistry: data.urlRegistry,
         urlTradeAgree: data.urlTradeAgree,
+        addres: data.addres,
+        email: data.email,
+        celPhone: data.celPhone,
+        advisor: data.advisor,
+        celPhoneAdvisor: data.celPhoneAdvisor,
+        typeId: data.typeId,
+        number: data.number,
+        dv: data.dv,
+        mercantileRegistration: data.mercantileRegistration,
+        responsability: data.responsability,
+        economyActivity: data.economyActivity,
         source: 'suppliers',
       },
       'POST',
@@ -83,6 +94,9 @@ export const ListSuppliers = () => {
   //Aqui realizamos el seteo de los "data" en el Estado global Brands a travez del dispatch llamando al reducer "addBrands" este se encarga de setear los
   //datos en el estado y notificar a todos los modulos que pueden usar estos datos
   //tambien realizamo la construcción de la tabla que listara los datos recuperados a travez del connect a el servidor
+  
+
+
   const callBack = (data) => {
     //dispatch(addSuppliers(data))
     buildTable(data)
@@ -184,9 +198,10 @@ export const ListSuppliers = () => {
                               <th>Id</th>
                               <th>Estado</th>
                               <th>Nombre</th>
-                              <th>Divipola</th>
-                              <th>Zipcode</th>
-                              <th>Descripción</th>
+                               <th>Email</th>
+                              <th>Telefono</th>
+                              <th>Asesor Asignado</th>
+                              <th>Telefono Asesor</th>
                             </tr>
                           </thead>
                           <tbody>{rowTable}</tbody>

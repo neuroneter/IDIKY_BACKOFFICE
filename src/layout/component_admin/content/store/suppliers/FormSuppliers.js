@@ -21,6 +21,7 @@ import Select from 'react-select'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack'
 
 export const FormSuppliers = ({ setlist, dataRow }) => {
+  console.log(dataRow)
   const stateDivipola = useSelector((state) => state.divipola)
 
   const dispatch = useDispatch()
@@ -59,7 +60,7 @@ export const FormSuppliers = ({ setlist, dataRow }) => {
     },
   })
 
-  const [typeId, setTypeId] = useState(dataRow.typeId)
+  const [typeDoc, setTypeDoc] = useState(dataRow.typeDoc)
 
   const callBack = (data) => {
     dispatch(changeFlagSuppliers(false))
@@ -92,8 +93,8 @@ export const FormSuppliers = ({ setlist, dataRow }) => {
       celPhone: data.celPhone,
       advisor: data.advisor,
       celPhoneAdvisor: data.celPhoneAdvisor,
-      typeId: typeId,
-      number: data.number,
+      typeDoc: typeDoc,
+      document: data.document,
       dv: data.dv,
       mercantileRegistration: data.mercantileRegistration,
       responsability: data.responsability,
@@ -106,6 +107,7 @@ export const FormSuppliers = ({ setlist, dataRow }) => {
     }else{
       Connect('suppliers/update', body, 'POST', callBack.bind(this))
     }
+    console.log(body)
   }
 
   return (
@@ -165,7 +167,7 @@ export const FormSuppliers = ({ setlist, dataRow }) => {
                   </Col>
 
                   <Col xs='6' sm='6' md='6'>
-                    <Divipola />
+                    <Divipola  defaultCiti={dataRow.divipola} />
                   </Col>
 
                   <Col xs='3' sm='3' md='3'>
@@ -204,32 +206,34 @@ export const FormSuppliers = ({ setlist, dataRow }) => {
                     <FormGroup>
                       <Label>Tipo de Documento</Label>
                       <Select
-                        defaultValue={typeId}
-                        selectedValue={typeId}
+                        defaultValue={dataRow.typeDoc}
+                        selectedValue={typeDoc}
                         options={options}
-                        onChange={(e) => setTypeId(e.value)}
+                        onChange={(e) => setTypeDoc(e.value)}
                       />
                     </FormGroup>
                   </Col>
+
 
                   <Col xs='3' sm='3' md='3'>
                     <Label>
                       Numero Documento
                       <span style={{ color: 'red' }}> * </span>
-                      {errors.number && (
+                      {errors.document && (
                         <span style={{ color: 'red' }}>
                           Este campo es requerido
                         </span>
                       )}
                     </Label>
+                    
                     <input
                       type='number'
-                      {...register('number', {
+                      {...register('document', {
                         required: true,
                         maxLength: 11,
                         minLength: 8,
                       })}
-                      defaultValue={dataRow.number}
+                      defaultValue={dataRow.document}
                       className='form-control'
                     />
                   </Col>
@@ -375,7 +379,7 @@ export const FormSuppliers = ({ setlist, dataRow }) => {
                         minLength: 10,
                         pattern: /[3]([0-9]{4})/,
                       })}
-                      defaultValue={dataRow.celePhoneAdvisor}
+                      defaultValue={dataRow.celPhoneAdvisor}
                       className='form-control'
                     />
                   </Col>

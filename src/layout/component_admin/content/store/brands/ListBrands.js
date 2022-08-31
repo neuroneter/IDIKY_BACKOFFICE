@@ -6,11 +6,11 @@ import { Image, Transformation } from 'cloudinary-react';
 import { CloudinaryContext } from "cloudinary-react";
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { addBrands } from '../../../../../stores/states/Brands';
+import { addBrands } from '../../../../../stores/states/store/Brands';
 import {useSelector} from 'react-redux';
 import { FormBrands } from './FormBrands';
 import { Modals } from '../../../../../components/cross/modals';
-import { changeFlag } from '../../../../../stores/states/Brands';
+import { changeFlag } from '../../../../../stores/states/store/Brands';
 
 
 /**
@@ -51,7 +51,7 @@ export const ListBrands = () => {
     //llama al metodo connect solicitando eliminar un registro y se cierra el modal seteando un valor false
     const callBackErase = () => {
         setModal(false);
-        Connect('brands/delete', {id:data._id, urlIcon:data.urlIcon, urlImage:data.urlImage, source:"brands"}, 'POST', callBackEraseDB.bind(this) );
+        Connect('brands/delete', {_id:data._id, urlIcon:data.urlIcon, urlImage:data.urlImage, source:"brands"}, 'POST', callBackEraseDB.bind(this) );
     }
 
     //esta funcion flecha callBack, es utilizada desde el "useEffect" por el connect cuando se solicita todos los registros a listar de la tabla brands

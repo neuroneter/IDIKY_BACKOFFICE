@@ -8,7 +8,7 @@ import { useForm, Controller } from 'react-hook-form';
 import {Connect} from "../../../../../stores/actions/Connect";
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { Checkbox } from "@material-ui/core";
-import { changeFlag } from '../../../../../stores/states/Brands';
+import { changeFlag } from '../../../../../stores/states/store/Brands';
 
 /**
  * En este modulo construimos el formulario para insertar o editar una marca
@@ -69,18 +69,28 @@ export const FormBrands = ({setlist, dataRow}) => {
     //crear un registro o editarlo
     //savemos si estamos creando un registro nuevo cuando dataRow no tiene ningun valor, y actualizar cuando este campo tiene los valores del registro a editar
     const save = (data)=> {
+
+        //Verificamos si las imagenes fueron cambiadas y se construye un objeto con las imagenes que serán adicionadas a la tabla de imagenes Temporales
+        let ImgRemove = []
+        if(icoObj.url !== dataRow.urlIcon) ImgRemove.push({source:"brands", url:dataRow.urlIcon})
+        if(imgObj.url !== dataRow.urlImage) ImgRemove.push({source:"brands", url:dataRow.urlImage})
+
         const body = {
-            id:dataRow._id,
+            _id:dataRow._id,
             state:data.state,
             name:data.name,
             urlIcon: icoObj.url,
             urlImage: imgObj.url,
-            description:data.description
+            description: data.description,
+            ImgRemove
         };
-        
-        (!dataRow._id)? 
-          Connect('brands/push', body, 'POST', callBack.bind(this)):
-          Connect('brands/update', body, 'POST', callBack.bind(this));
+
+        if(!dataRow._id){
+          body['_id'] = dataRow._id
+          Connect('brands/push', body, 'POST', callBack.bind(this))
+        }else{
+          Connect('brands/update', body, 'POST', callBack.bind(this))
+        }
     }
 
     return (
@@ -150,7 +160,15 @@ export const FormBrands = ({setlist, dataRow}) => {
                                   <Label>Icono de la marca</Label>
                                   <Row className="align-items-center">
                                       <Col md="4" >{icoObj.view}</Col>
-                                      <Col><Upload bName="+ Cargar Icono" source="brands" setObj={setIcoObj.bind(this)} vWidth="100" vCrop="scale" mWidth="50" mHeight="50" /></Col>
+                                      <Col><Upload 
+                                        bName="+ Cargar Icono" 
+                                        source="brands" 
+                                        setObj={setIcoObj.bind(this)} 
+                                        thisImg={icoObj}
+                                        vWidth="100" 
+                                        vCrop="scale" 
+                                        mWidth="50" 
+                                        mHeight="50" /></Col>
                                   </Row>
                               </FormGroup>
                           </Col>
@@ -159,7 +177,16 @@ export const FormBrands = ({setlist, dataRow}) => {
                                   <Label>Imagen de la marca</Label>
                                   <Row className="align-items-center">
                                       <Col md="4" >{imgObj.view}</Col>
-                                      <Col><Upload bName="+ Cargar Imagen" source="brands" setObj={setImgObj.bind(this)} vWidth="100" vCrop="scale" mWidth="500" mHeight="500" /></Col>
+                                      <Col>
+                                        <Upload 
+                                          bName="+ Cargar Imagen" 
+                                          source="brands" 
+                                          setObj={setImgObj.bind(this)} 
+                                          vWidth="100" 
+                                          vCrop="scale" 
+                                          mWidth="500" 
+                                          mHeight="500" />
+                                        </Col>
                                   </Row>
                               </FormGroup>
                           </Col>

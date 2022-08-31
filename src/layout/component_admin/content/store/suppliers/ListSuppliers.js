@@ -13,13 +13,13 @@ import {
 import { Connect } from '../../../../../stores/actions/Connect'
 import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'
-import { addSuppliers } from '../../../../../stores/states/Suppliers'
+import { addSuppliers } from '../../../../../stores/states/store/Suppliers'
 import { useDispatch, useSelector } from 'react-redux'
 import { FormSuppliers } from './FormSuppliers'
 import { Image, Transformation } from 'cloudinary-react'
 import { CloudinaryContext } from 'cloudinary-react'
 import { Modals } from '../../../../../components/cross/modals'
-import { changeFlagSuppliers } from '../../../../../stores/states/Suppliers'
+import { changeFlagSuppliers } from '../../../../../stores/states/store/Suppliers'
 
 /**
  * Este Modulo lista los registros de marcas de la tabla ListBrands
@@ -64,7 +64,7 @@ export const ListSuppliers = () => {
     Connect(
       'Suppliers/delete',
       {
-        id: data._id,
+        _id: data._id,
         name: data.name,
         divipola: data.divipola,
         zipCode: data.zipCode,
@@ -84,9 +84,9 @@ export const ListSuppliers = () => {
   //datos en el estado y notificar a todos los modulos que pueden usar estos datos
   //tambien realizamo la construcción de la tabla que listara los datos recuperados a travez del connect a el servidor
   const callBack = (data) => {
-    dispatch(addSuppliers(data))
+    //dispatch(addSuppliers(data))
     buildTable(data)
-    console.log(data)
+    //console.log(data)
   }
 
   //Funcion flecha que abstrae la construcción de la tabla utilizando un bucle "map" el cual nos permite construir la misma estructura de la tabla
@@ -140,9 +140,9 @@ export const ListSuppliers = () => {
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
-    //if (!stateSuppliers.flagSuppliers)
-    //Connect('suppliers/list', null, 'GET', callBack.bind(this))
-    //else buildTable(stateSuppliers.allSuppliers)
+    if (!stateSuppliers.flagSuppliers)
+      Connect('suppliers/list', null, 'GET', callBack.bind(this))
+    else buildTable(stateSuppliers.allSuppliers)
   }, [stateSuppliers.allSuppliers])
 
   return (

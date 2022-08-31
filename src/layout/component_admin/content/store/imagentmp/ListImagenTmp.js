@@ -29,9 +29,10 @@ export const ListImagenTmp = () => {
 
 
     const erase = (dataRow) => {
-        console.log(dataRow);
-        cloudinary.v2.uploader.destroy({url: "https://res.cloudinary.com/idikydev/image/upload/v1659541030/store/brands/52462029_22.png", public_id: "v1659541030"})
-        .then(resp => {Connect('tmpimg/list', null, 'GET', callBack.bind(this) );})
+        cloudinary.v2.uploader.destroy(dataRow.url)
+        .then(resp => {
+            Connect('tmpimg/delete', {_id:dataRow._id}, 'POST', callBack.bind(this) );
+        })
         .catch(_err=> console.log("No se puedo realizar la eliminación de la imagen"));
     }
 

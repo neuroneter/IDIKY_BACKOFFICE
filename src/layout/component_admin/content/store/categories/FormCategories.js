@@ -7,7 +7,7 @@ import { CloudinaryContext } from "cloudinary-react";
 import { useForm } from 'react-hook-form';
 import {Connect} from "../../../../../stores/actions/Connect";
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import { changeFlagCategories } from '../../../../../stores/states/Categories';
+import { changeFlagCategories } from '../../../../../stores/states/store/Categories';
 
 export const FormCategories = ({setlist, dataRow}) => {
 
@@ -38,17 +38,25 @@ export const FormCategories = ({setlist, dataRow}) => {
     }
 
     const save = (data)=> {
+
+        let ImgRemove = []
+        if(icoObj.url !== dataRow.urlIcon) ImgRemove.push({source:"categories", url:dataRow.urlIcon})
+        if(imgObj.url !== dataRow.urlImage) ImgRemove.push({source:"categories", url:dataRow.urlImage})
+      
         const body = {
-            id:dataRow._id,
             name:data.name,
             urlIcon: icoObj.url,
             urlImage: imgObj.url,
-            description:data.description
+            description:data.description,
+            ImgRemove
         };
-        
-        (!dataRow._id)? 
-          Connect('categories/push', body, 'POST', callBack.bind(this)):
-          Connect('categories/update', body, 'POST', callBack.bind(this));
+
+        if(!dataRow._id){
+          body['_id'] = dataRow._id
+          Connect('categories/push', body, 'POST', callBack.bind(this))
+        }else{
+          Connect('categories/update', body, 'POST', callBack.bind(this))
+        }
     }
 
     return (
@@ -97,7 +105,15 @@ export const FormCategories = ({setlist, dataRow}) => {
                                   <Label>Icono de la categoría</Label>
                                   <Row className="align-items-center">
                                       <Col md="4" >{icoObj.view}</Col>
-                                      <Col><Upload bName="+ Cargar Icono" source="categories" setObj={setIcoObj.bind(this)} vWidth="100" vCrop="scale" mWidth="50" mHeight="50" /></Col>
+                                      <Col>
+                                        <Upload 
+                                          bName="+ Cargar Icono" 
+                                          source="categories" 
+                                          setObj={setIcoObj.bind(this)} 
+                                          vWidth="100" 
+                                          vCrop="scale" 
+                                          mWidth="50" 
+                                          mHeight="50" /></Col>
                                   </Row>
                               </FormGroup>
                           </Col>
@@ -106,7 +122,14 @@ export const FormCategories = ({setlist, dataRow}) => {
                                   <Label>Imagen de la categoría</Label>
                                   <Row className="align-items-center">
                                       <Col md="4" >{imgObj.view}</Col>
-                                      <Col><Upload bName="+ Cargar Imagen" source="categories" setObj={setImgObj.bind(this)} vWidth="100" vCrop="scale" mWidth="500" mHeight="500" /></Col>
+                                      <Col><Upload 
+                                        bName="+ Cargar Imagen" 
+                                        source="categories" 
+                                        setObj={setImgObj.bind(this)} 
+                                        vWidth="100" 
+                                        vCrop="scale" 
+                                        mWidth="500" 
+                                        mHeight="500" /></Col>
                                   </Row>
                               </FormGroup>
                           </Col>

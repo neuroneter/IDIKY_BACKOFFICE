@@ -1,6 +1,6 @@
 import React  from 'react'
 import { makeStyles } from '@material-ui/core/styles';
-import { Board } from './content/Board'
+import { Home } from './content/store/Home'
 import { useParams } from 'react-router'
 import {useSelector} from 'react-redux';
 
@@ -29,11 +29,11 @@ export const Content = ({drawerWidth}) => {
     const classes = useStyles();
 
    const ModuleTmp = () => {
-      if(params.layout !== undefined){
-        const module = locals.menus.find(obj => obj.module === params.layout);
-        return module.component;
-      }else return <Board/>
-      
+        let objMenuFather = locals.menus.find(obj => obj.module === params.module);
+        if(params.layout !== undefined){
+            let objMenuChild = objMenuFather.childs.find(obj => obj.module === params.layout);
+            return objMenuChild.component;
+        }else return objMenuFather.component;
    }
 
     return (
@@ -43,5 +43,3 @@ export const Content = ({drawerWidth}) => {
         </main>
     )
 }
-
-//<Fragment >{module}</Fragment>

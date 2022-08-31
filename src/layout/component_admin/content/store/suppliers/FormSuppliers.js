@@ -14,7 +14,7 @@ import { Upload } from '../../../../../components/cross/upload'
 import { Image, Transformation } from 'cloudinary-react'
 import { CloudinaryContext } from 'cloudinary-react'
 import { useForm } from 'react-hook-form'
-import { changeFlagSuppliers } from '../../../../../stores/states/Suppliers'
+import { changeFlagSuppliers } from '../../../../../stores/states/store/Suppliers'
 import { Divipola } from '../../../../../components/cross/divipola'
 import { Connect } from '../../../../../stores/actions/Connect'
 import Select from 'react-select'
@@ -73,6 +73,13 @@ export const FormSuppliers = ({ setlist, dataRow }) => {
   ]
 
   const save = (data) => {
+
+    let ImgRemove = []
+    if(imgCommerce.url !== dataRow.urlCommerce) ImgRemove.push({source:"suppliers", url:dataRow.urlCommerce})
+    if(imgRegistry.url !== dataRow.urlRegistry) ImgRemove.push({source:"suppliers", url:dataRow.urlRegistry})
+    if(imgTradeAgree.url !== dataRow.urlTradeAgree) ImgRemove.push({source:"suppliers", url:dataRow.urlTradeAgree})
+
+
     const body = {
       name: data.name,
       divipola: stateDivipola.defaultCity.code,
@@ -91,12 +98,14 @@ export const FormSuppliers = ({ setlist, dataRow }) => {
       mercantileRegistration: data.mercantileRegistration,
       responsability: data.responsability,
       economyActivity: data.economyActivity,
+      ImgRemove
     }
-    console.log(body)
-
-    !dataRow._id
-      ? Connect('suppliers/push', body, 'POST', callBack.bind(this))
-      : Connect('suppliers/update', body, 'POST', callBack.bind(this))
+    if(!dataRow._id){
+      body['_id'] = dataRow._id
+      Connect('suppliers/push', body, 'POST', callBack.bind(this))
+    }else{
+      Connect('suppliers/update', body, 'POST', callBack.bind(this))
+    }
   }
 
   return (

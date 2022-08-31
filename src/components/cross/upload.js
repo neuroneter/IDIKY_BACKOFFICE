@@ -1,9 +1,10 @@
 import React from 'react'
 import {Button} from 'reactstrap';
+import {Col } from 'reactstrap';
 import { Image, Transformation } from 'cloudinary-react';
 import { CloudinaryContext } from "cloudinary-react";
 import { openUploadWidget } from "./cloudinary";
-import {Connect} from "../../stores/actions/Connect"
+import {Connect} from "../../stores/actions/Connect";
 
 /**
  * Funcion flecha que integra a Cloudinary para hacer la carga de un recurso
@@ -20,7 +21,7 @@ import {Connect} from "../../stores/actions/Connect"
  * mHeight: Alto minimo que se le permite al usuario cargar de una imagen al servidor
  */
 export const Upload = ({bName, source, setObj, vWidth, vCrop, mWidth, mHeight}) => {
-
+    
     /**
      * Esta funcion se envia en el momento de registrar la url de imagen en la tabla temporal de imagenes
      * permitiendo que si esta imagen no es instanciada por un registro posterior la tendremos identificada en esta tabla "TmpImg"
@@ -28,10 +29,13 @@ export const Upload = ({bName, source, setObj, vWidth, vCrop, mWidth, mHeight}) 
      * Una vez la imagen es instanciada el callback responde a quien llamo al modulo y informa la url y un objeto con la miniatura de la imagen 
      */
     const callBack = (data) => {
+      let urlTmp = ''
+      if(data.length > 1) urlTmp = data[data.length-1].url
+      else  urlTmp =  data[0].url
       setObj({
-        url:data.url,
+        url:urlTmp,
         view:(<CloudinaryContext cloudName="idikydev" uploadPreset="bobSeller">
-                <Image publicId={data.url+".jpg"} > <Transformation width={vWidth} crop={vCrop} /> </Image>
+                <Image publicId={urlTmp+".jpg"} > <Transformation width={vWidth} crop={vCrop} /> </Image>
               </CloudinaryContext>
               )
       });
@@ -67,7 +71,7 @@ export const Upload = ({bName, source, setObj, vWidth, vCrop, mWidth, mHeight}) 
         openUploadWidget(uploadOptions, async (error, photos) => {
           if (!error) {
             if(photos.event === 'success'){
-              Connect('tmpimg/push', {source:source, url:photos.info.public_id}, 'POST', callBack.bind(this) );
+              Connect('tmpimg/push', [{source:source, url:photos.info.public_id}], 'POST', callBack.bind(this) );
             }
           } else {
             console.log(error);
@@ -78,9 +82,11 @@ export const Upload = ({bName, source, setObj, vWidth, vCrop, mWidth, mHeight}) 
 
     return (
         <CloudinaryContext cloudName='dotcom-group-sas' uploadPreset='bobSeller'>
+          <Col xs="12" md="12" className="p-2">
             <Button onClick={beginUpload.bind(this)} size="sm" className="btn btn-success active">
                 {bName}
             </Button>
+          </Col>
         </CloudinaryContext>
     )
 

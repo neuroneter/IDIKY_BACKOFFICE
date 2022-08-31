@@ -7,9 +7,8 @@ import {Title} from './top_bar/Title';
 import {Email} from './top_bar/Email';
 import {Alert} from './top_bar/Alert';
 import {Acount} from './top_bar/Account';
-import {MobilMenu} from './top_bar/MobilMenu';
 
-export default function TopToolBar({handleDrawerToggle, params}) {
+export default function TopToolBar() {
 
       const useStyles = makeStyles((theme) => ({
         grow: {
@@ -51,11 +50,12 @@ export default function TopToolBar({handleDrawerToggle, params}) {
         setAnchorEl(null);
         handleMobileMenuClose();
       };
-    
+/*    
       const handleMobileMenuOpen = (event) => {
         setMobileMoreAnchorEl(event.currentTarget);
       };
- 
+ */
+
     return (
         <div className={classes.grow}>
             <Toolbar>
@@ -67,7 +67,7 @@ export default function TopToolBar({handleDrawerToggle, params}) {
                 >
                     <MenuIcon />
                 </IconButton>
-                <Title params={params}/>
+                <Title/>
                 <div className={classes.grow} />
                 <div className={classes.sectionDesktop}>
                     <Email/>

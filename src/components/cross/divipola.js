@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setDefaultCity } from '../../stores/states/Divipola';
+import { setDefaultCity } from '../../stores/states/store/Divipola';
 import {Row, Col, FormGroup, Label } from 'reactstrap';
 import Select from 'react-select';
 
@@ -14,7 +14,8 @@ export const Divipola = ({defaultCiti}) => {
     const [statesCountry, setStatesCountry] = useState() //Estado para listas de estados
     const [citiesCountry, setCitiesCountry] = useState() //Estado para listas de ciudades
 
-    const statesList = (dState) => {
+    const statesList = (dState, dCity) => {
+     
         const options = [stateDivipola.defaultState];   
         stateDivipola.allDivipola.map( states => {
           options.push({value:states.code, code:states.code, label:states.name});
@@ -26,6 +27,17 @@ export const Divipola = ({defaultCiti}) => {
             options={options} 
             onChange={stateSelet.bind(this)} 
           />);
+        if(dCity === null){
+          setCitiesCountry(
+            <Select 
+                defaultValue={ {value:'0', code:'0', label:'Ciudad'} }
+                selectedValue={ {value:'0', code:'0', label:'Ciudad'} }
+                options={[{value:'0', code:'0', label:'Ciudad'}]}  
+                onChange={citieSelect.bind(this)} 
+            />);
+        }
+        
+        
 
     }
     
@@ -41,11 +53,14 @@ export const Divipola = ({defaultCiti}) => {
             setCitiesCountry(<></>);
         } 
 
-        const options = [{value:'0', code:'0', label:'Ciudad'}];   
-        const allCities = stateDivipola.allDivipola.find(states => states.code === info.code);
-        allCities.cities.map( cities => {
-            options.push({value:cities.code, code:cities.code, label:cities.name});
-        });
+        const options = [{value:'0', code:'0', label:'Ciudad'}];
+        
+        if(info.code !== "0"){
+          const allCities = stateDivipola.allDivipola.find(states => states.code === info.code);
+          allCities.cities.map( cities => {
+              options.push({value:cities.code, code:cities.code, label:cities.name});
+          });
+        }
 
         setTimeout(function(){
             setCitiesCountry(
@@ -68,7 +83,7 @@ export const Divipola = ({defaultCiti}) => {
     }
     
     useEffect(() => {
-        
+      console.log(defaultCiti);
         if(defaultCiti !== undefined) {
             let stateTmp = defaultCiti[0]+defaultCiti[1];
             let stateSelect = stateDivipola.allDivipola.find(states => states.code === stateTmp);
@@ -83,7 +98,6 @@ export const Divipola = ({defaultCiti}) => {
         }else statesList(null, null);
     },[])
 
-       
       return (
         <Row>
                 <Col>

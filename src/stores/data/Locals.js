@@ -2,15 +2,17 @@ import SettingsIcon from '@material-ui/icons/Settings'
 import Storefront from '@material-ui/icons/Storefront'
 import ApartmentIcon from '@material-ui/icons/Apartment'
 import HomeIcon from '@material-ui/icons/Home'
+import Tune from  '@material-ui/icons/Tune'
 import CategoryIcon from '@material-ui/icons/Category'
 import AppsIcon from '@material-ui/icons/Apps'
 import BrokenImageIcon from '@material-ui/icons/BrokenImage'
 import PermContactCalendarIcon from '@material-ui/icons/PermContactCalendar'
 import { ListBrands } from '../../layout/component_admin/content/store/brands/ListBrands'
 import { ListImagenTmp } from '../../layout/component_admin/content/store/imagentmp/ListImagenTmp'
-import { Board } from '../../layout/component_admin/content/Board'
+import { Home } from '../../layout/component_admin/content/store/Home'
 import { ListCategories } from '../../layout/component_admin/content/store/categories/ListCategories'
 import { ListSuppliers } from '../../layout/component_admin/content/store/suppliers/ListSuppliers'
+import { ListFeatures } from '../../layout/component_admin/content/store/features/ListFeatures'
 /**
  * Se definien las rutas de navegación y para cada ruta se envía el módulo a cargar para esta ruta
  * languge: es la etiqueta que define el lenguaje de este menu
@@ -31,128 +33,119 @@ export const Locals = [
     language: 'es_col',
     title: 'Bienvenidos a Idiky',
     menus: [
+      //Menu1 Inicio
       {
-        group: 'menu1',
-        key: '1',
+        key: 'Menu1',
         title: 'Bienvenidos a Idiky',
         label: 'Inicio',
-        module: 'board',
+        module: 'home',
+        childs:[],
         icon: <HomeIcon />,
-        component: <Board />,
-        route: '/admin',
+        component: <Home />,
+        backgroundColor:'#e3edf9',
+        color:'black',
+        route: '/admin/home/'
       },
+      //Menu2 Inicio
       {
-        group: 'menu1',
-        key: '2',
+        key: 'Menu2',
         title: 'Tienda',
-        child: 'menu3',
+        childs:[
+          {
+            key: 'Menu2Sub1',
+            title: 'Lista de Marcas',
+            label: 'Marcas',
+            module: 'brands',
+            icon: <AppsIcon />,
+            component: <ListBrands />,
+            route: '/admin/store/brands',
+          },
+          {
+            key: 'Menu2Sub2',
+            title: 'Gestiona las categorias',
+            label: 'Categorías',
+            module: 'categories',
+            icon: <CategoryIcon />,
+            component: <ListCategories />,
+            route: '/admin/store/categories',
+          },
+          {
+            key: 'Menu2Sub3',
+            title: 'Gestiona imagenes huerfanas',
+            label: 'Imagenes Tmp',
+            module: 'imagentmp',
+            icon: <BrokenImageIcon />,
+            component: <ListImagenTmp />,
+            route: '/admin/store/imagentmp',
+          },
+          {
+            key: 'Menu2Sub4',
+            title: 'Lista de Proveedores',
+            label: 'Proveedores',
+            module: 'suppliers',
+            icon: <PermContactCalendarIcon />,
+            component: <ListSuppliers />,
+            route: '/admin/store/suppliers',
+          },
+          {
+            key: 'Menu2Sub5',
+            title: 'Lista de Carcateristicas',
+            label: 'Caracteristicas',
+            module: 'features',
+            icon: <Tune />,
+            component: <ListFeatures />,
+            route: '/admin/store/features',
+          }
+        ],
         label: 'Tienda',
         module: 'store',
         icon: <Storefront />,
-        component: <Board />,
+        component: <Home />,
         route: '/admin/store/',
+        backgroundColor:'#e3edf9',
+        color:'black'
       },
+      //Menu3 Inicio
       {
-        group: 'menu3',
-        key: '3',
-        title: 'Lista de Marcas',
-        label: 'Marcas',
-        module: 'brands',
-        icon: <AppsIcon />,
-        component: <ListBrands />,
-        route: '/admin/store/brands',
-      },
-      {
-        group: 'menu3',
-        key: '4',
-        title: 'Gestiona las categorias',
-        label: 'Categorías',
-        module: 'categories',
-        icon: <CategoryIcon />,
-        component: <ListCategories />,
-        route: '/admin/store/categories',
-      },
-
-      {
-        group: 'menu3',
-        key: '5',
-        title: 'Gestiona imagenes huerfanas',
-        label: 'Imagenes Tmp',
-        module: 'imagentmp',
-        icon: <BrokenImageIcon />,
-        component: <ListImagenTmp />,
-        route: '/admin/store/imagentmp',
-      },
-
-      {
-        group: 'menu1',
-        key: '6',
+        key: 'Menu3',
         title: 'Gestiona información de aliados',
-        child: 'menu2',
-        module: 'board',
+        childs:[
+          {
+            key: 'Menu3Sub1',
+            title: 'Lista de Marcas',
+            label: 'Residentes',
+            module: 'res',
+            icon: <SettingsIcon />,
+            component: <Home />,
+            route: 'board',
+          },
+          {
+            key: 'Menu3Sub2',
+            title: 'Lista de Marcas',
+            label: 'Colaboradores',
+            module: 'col',
+            icon: <SettingsIcon />,
+            component: <Home />,
+            route: 'board',
+          },
+          {
+            key: 'Menu3Sub3',
+            title: 'Lista de Marcas',
+            label: 'Configuración',
+            module: 'settings',
+            icon: <SettingsIcon />,
+            component: <Home />,
+            route: '/admin/settings/:id',
+          }
+        ],
+        module: 'partner',
         label: 'Aliados',
         icon: <ApartmentIcon />,
-        component: <Board />,
+        component: <Home />,
         route: '/admin/partner/',
-      },
-
-      {
-        group: 'menu2',
-        key: '7',
-        title: 'Lista de Marcas',
-        label: 'Residentes',
-        module: 'res',
-        icon: <SettingsIcon />,
-        component: <Board />,
-        route: 'board',
-      },
-      {
-        group: 'menu2',
-        key: '8',
-        title: 'Lista de Marcas',
-        label: 'Colaboradores',
-        module: 'col',
-        icon: <SettingsIcon />,
-        component: <Board />,
-        route: 'board',
-      },
-      {
-        group: 'menu2',
-        key: '9',
-        title: 'Lista de Marcas',
-        label: 'Configuración',
-        module: 'settings',
-        icon: <SettingsIcon />,
-        component: <Board />,
-        route: '/admin/settings/:id',
-      },
-      {
-        group: 'menu3',
-        key: '10',
-        title: 'lista de Proveedores',
-        label: 'Proveedores',
-        module: 'suppliers',
-        icon: <PermContactCalendarIcon />,
-        component: <ListSuppliers />,
-        route: '/admin/store/suppliers',
-      },
+        backgroundColor:'#e3edf9',
+        color:'black'
+      }
     ],
-  },
-  {
-    language: 'en_eus',
-    title: 'Sistema de información',
-    menus: [
-      {
-        group: 'menu1',
-        key: '1',
-        title: 'Tienda',
-        child: 'menu3',
-        label: 'Tienda',
-        module: 'store',
-        icon: <SettingsIcon />,
-        component: <Board />,
-        route: '/admin/store/',
-      },
-    ],
-  },
+  }
 ]

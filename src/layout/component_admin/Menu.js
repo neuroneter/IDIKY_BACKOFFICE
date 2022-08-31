@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import Divider from '@material-ui/core/Divider';
 import List from '@material-ui/core/List';
@@ -17,6 +17,7 @@ function Menu(props) {
     let history = useHistory();
 
     const {locals} = useSelector(state => state.locals);
+    const [oldMenu, setOldMenu] = useState("");
     
     const useStyles = makeStyles((theme) => ({
         drawer: {
@@ -37,37 +38,35 @@ function Menu(props) {
 
     const theme = useTheme();
 
-    const clicItem = (menu, position, father) => {
-      if(position === 'father' && menu.child !== undefined){
-        let domObj = document.getElementById(menu.child);
-        (domObj.style.display === 'block')?domObj.style.display = 'none':domObj.style.display = 'block';
-      }else{
-        history.push(menu.route); 
+    const clicItem = (menu, position) => {
+      if(position === 'father'){
+        if(oldMenu !== '') document.getElementById(oldMenu).style.display = 'none';
+        if(menu.key !== undefined) setOldMenu("F_"+menu.key);
+        document.getElementById("F_"+menu.key).style.display = 'block';
       }
+      history.push(menu.route); 
     }
 
-    function menu(info,position, father){
+    function menu(info, position){
       return (
-        <ListItem key={info.key} button onClick={ clicItem.bind(this,info,position,father ) }>
-          <ListItemIcon>{info.icon}</ListItemIcon>
+        <ListItem key={info.key} style={{backgroundColor:info.backgroundColor, color:info.color}}  button onClick={ clicItem.bind(this, info, position ) }>
+          <ListItemIcon style={{color:info.color}}>{info.icon}</ListItemIcon>
           <ListItemText primary={info.label} />
         </ListItem>
       )
     }
 
-    function buildMenu(objMenu){ 
-      //Recorremos todos los objetos del menu
-      let value = objMenu.map((objFather) => {
-        //Buscamos todos los menus quer correspondan su grupo 
-        let allChilds = locals.menus.filter(menu => menu.group === objFather.child);
+    function buildMenu(){
+      let value = locals.menus.map((objFather) => {
         //Recorremos los menus que son hijos del menu padre
-        let childs = allChilds.map((objChild) => {
-          return menu(objChild,'child', objFather.module);
+        let childs = objFather.childs.map((objChild) => {
+          return menu(objChild, 'child');
         });
+        
         //Creamos la estructura que envuelve a los items del menu Padre y los menus hijo
         return (<div key={objFather.key}>
-                  {menu(objFather,'father', null)}
-                  <div id={objFather.child} style={{display: 'none'}}>{childs}</div>
+                  {menu(objFather,'father')}
+                  <div id={"F_"+objFather.key} style={{display: 'none'}}>{childs}</div>
                 </div>);
       });
       return (<List>{value}</List>);
@@ -76,7 +75,7 @@ function Menu(props) {
     const drawer = (
         <div className="Menu">
             <img id="logo" src={logo} alt="idiky Logo"  />
-              <Divider/>{buildMenu( locals.menus.filter( menu => menu.group === "menu1" ))}
+              <Divider/>{buildMenu()}
         </div>
     );
 

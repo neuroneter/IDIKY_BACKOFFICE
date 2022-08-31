@@ -1,4 +1,4 @@
-import { Locals } from '../data/Locals';
+import { Locals } from '../../data/Locals';
 import { createSlice } from '@reduxjs/toolkit'
 
 export const loadLocals = createSlice({

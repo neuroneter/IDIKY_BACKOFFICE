@@ -7,7 +7,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import Menu from './component_admin/Menu'
 import TopToolBar from './component_admin/TopToolBar'
 import {Content} from './component_admin/Content'
-import {addDivipola} from '../stores/states/Divipola'
+import {addDivipola} from '../stores/states/store/Divipola'
 import { useDispatch } from 'react-redux'
 import {Connect} from "../stores/actions/Connect"
 
